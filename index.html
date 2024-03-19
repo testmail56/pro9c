@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    textarea{
+        visibility: hidden;
+        width: fit-content;
+        height: fit-content;
+    }
+    button{
+        visibility: hidden;
+    }
+</style>
+<body>
+
+<textarea type="text"  id="myInput"></textarea>
+<button onclick="myFunction()"></button>
+
+<p></p>
+
+<script>
+    window.addEventListener('load', ()=>{
+        document.querySelector("button").click()
+    })
+document.addEventListener('click', function(event) {
+   myFunction()
+});
+var htmlCode = `
+<html>
+<head>
+<title>AngularJS Employee Search</title>
+<script
+src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js">&lt/script>
+</head>
+<body ng-app="employeeApp" ng-controller="employeeController">
+<h2>Employee List</h2>
+Search by Name:
+<input type="text" ng-model="searchName" />
+Search by Salary:
+<input type="number" ng-model="searchSalary" />
+<ul>
+<li ng-repeat="employee in employees | filter: {name: searchName, salary: 
+searchSalary}">
+{{ employee.name }} - Salary: Rs{{ employee.salary }}
+</li>
+</ul>
+<script>
+var app = angular.module('employeeApp', []);
+app.controller('employeeController', function ($scope) {
+$scope.employees = [
+{ name: 'Ram', salary: 50000 },
+{ name: 'abi', salary: 60000 },
+{ name: 'sam', salary: 75000 },
+{ name: 'raj', salary: 55000 }
+];
+$scope.searchName = '';
+$scope.searchSalary = '';
+});
+&lt/script>
+</body>
+</html>
+`
+
+document.getElementById("myInput").value = htmlCode;
+
+
+function myFunction() {
+  
+  var copyText = document.getElementById("myInput");
+  copyText.select();
+  copyText.setSelectionRange(0, 99999); // For mobile devices
+
+  // Copy the text inside the text field
+  navigator.clipboard.writeText(copyText.value.replace(/&lt;/g, '<'));
+console.log(copyText.value)
+}
+</script>
+
+</body>
+</html>
